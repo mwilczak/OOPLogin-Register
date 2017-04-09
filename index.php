@@ -1,7 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mateusz
- * Date: 09.04.17
- * Time: 18:38
- */
+require_once 'core/init.php';
+
+
+echo Config::get('mysql/host'); // localhost 127.0.0.1
+
+
+//$user = DB::getInstance()->get('users', array('username', '=', 'mat'));
+//
+//if (!$user->count()){
+//    echo 'No user';
+//}else {
+//    echo 'Hello user';
+//}
