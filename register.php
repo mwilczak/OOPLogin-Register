@@ -1,7 +1,72 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mateusz
- * Date: 09.04.17
- * Time: 18:39
- */
+require_once 'core/init.php';
+
+
+if(Input::exists())
+{
+    $validate = new Validation();
+    $validation = $validate->check($_POST, array(
+        'username' => array(
+            'required' => true,
+            'min' => 2,
+            'max' => 20,
+            'unique' => 'users' //sprawdza czy już jest uzytkownik
+        ),
+        'password' => array(
+            'required' => true,
+            'min' => 6
+
+        ),
+        'password_again' => array(
+            'required' => true,
+            'matches' => 'password'
+        ),
+        'name' => array(
+            'required' => true,
+            'min' => 2,
+            'max' => 50
+        )
+    ));
+//    echo Input::get('username');    // echo $_POST['username']
+
+    if($validation->passed()){
+        //register
+        echo 'Sukces';
+    }else {
+        //error
+//        print_r($validation->errors());
+        foreach ($validation->errors() as $error){
+            echo $error, '<br>';
+        }
+    }
+
+}
+
+
+?>
+
+
+<form action="" method="POST">
+    <div class="field">
+        <label for="username">Nazwa użytkownika</label>
+        <input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off">
+    </div>
+
+    <div class="field">
+        <label for="password">Podaj hasło</label>
+        <input type="password" name="password" id="password">
+    </div>
+
+    <div class="field">
+        <label for="password_again">Powtórz hasło</label>
+        <input type="password" name="password_again" id="password_again">
+    </div>
+
+    <div class="field">
+        <label for="name">Imię i nazwisko</label>
+        <input type="name" name="name" id="name" value="<?php echo escape(Input::get('name')); ?>"">
+    </div>
+
+    <input type="submit" name="subtmit" value="Zarejestruj">
+</form>
+

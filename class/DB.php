@@ -52,18 +52,18 @@ class DB
 
     public function action($action, $table, $where = array()) //public bo może użyjemy poza
     {
-        if(count($where) === 3){ //field, operaters, value = 3
+        if (count($where) === 3) { //field, operaters, value = 3
             $operators = array('=', '>', '<', '>=', '<=');
 
-            $field      = $where[0];
-            $operator   = $where[1];
-            $value      = $where[2];
+            $field = $where[0];
+            $operator = $where[1];
+            $value = $where[2];
 
-            if(in_array($operator, $operators)){
+            if (in_array($operator, $operators)) {
                 // $sql = "SELECT * FROM users WHERE username = 'Mat'";
                 $sql = "{$action}  FROM {$table} WHERE {$field} {$operator} ?";
 
-                if(!$this->query($sql, array($value))->error()){
+                if (!$this->query($sql, array($value))->error()) {
                     return $this;
 
                 }
@@ -95,25 +95,25 @@ class DB
     public function insert($table, $fields = array())
     {
 //        if(count($fields)){
-            $keys = array_keys($fields);
-            $values = null;
-            $x = 1;
+        $keys = array_keys($fields);
+        $values = null;
+        $x = 1;
 
-            foreach($fields as $field) {
-                $values .= '?';
-                if($x < count($fields)){
-                    $values .= ', ';
-                }
-                $x++;
+        foreach ($fields as $field) {
+            $values .= '?';
+            if ($x < count($fields)) {
+                $values .= ', ';
             }
+            $x++;
+        }
 
 
-            //budujemy zapytanie
-            $sql = "INSERT INTO users (`". implode('`,`', $keys) ."`) VALUES ({$values})";
+        //budujemy zapytanie
+        $sql = "INSERT INTO users (`" . implode('`,`', $keys) . "`) VALUES ({$values})";
 
-            if(!$this->query($sql, $fields)->error()) {
-                return true;
-            }
+        if (!$this->query($sql, $fields)->error()) {
+            return true;
+        }
 
 //        }
         return false;
@@ -125,16 +125,16 @@ class DB
         $x = 1;
 
         //set
-        foreach ($fields as $name => $value){
+        foreach ($fields as $name => $value) {
             $set .= "{$name} = ?";
-            if($x < count($fields)){
+            if ($x < count($fields)) {
                 $set .= ', ';
             }
             $x++;
         }
 
         $sql = "UPDATE {$table} SET {$set} WHERE id = {$id}  ";
-        if(!$this->query($sql, $fields)->error()){
+        if (!$this->query($sql, $fields)->error()) {
             return true;
         }
         return false;
@@ -144,6 +144,7 @@ class DB
     {
         return $this->_error;
     }
+
     public function count()
     {
         return $this->_count;

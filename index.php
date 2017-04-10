@@ -5,10 +5,9 @@ $user = DB::getInstance()->update('users', 3, array(
 //    'username' => 'Mateusz',
     'password' => 'nowehaslo',
 //    'salt'     => 'salt',
-    'name'     => 'Imie i beznawizka',
+    'name' => 'Imie i beznawizka',
 //    'joined'   => '2017-04-09 00:00:00',
 //    'group'    => '1'
-
 
 
 ));
@@ -33,7 +32,6 @@ $user = DB::getInstance()->update('users', 3, array(
 //
 //    }
 //}
-
 
 
 //echo Config::get('mysql/host'); // localhost 127.0.0.1

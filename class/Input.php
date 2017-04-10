@@ -1,12 +1,32 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: mateusz
- * Date: 09.04.17
- * Time: 19:11
- */
+
 class Input
 {
+    public static function exists($type = 'post')
+    {
+        switch ($type) {
+            case 'post':
+                return (!empty($_POST)) ? true : false;
+                break;
 
+            case 'get':
+                return (!empty($_GET)) ? true : false;
+                break;
+
+            default:
+                return false;
+                break;
+        }
+    }
+
+    public static function get($item)
+    {
+        if(isset($_POST[$item])){
+            return $_POST[$item];
+        }else if(isset($_GET[$item])){
+            return $_GET[$item];
+        }
+        return ''; // jeśli nieistnieją musimy mieć jakiś return
+    }
 }
