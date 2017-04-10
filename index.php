@@ -7,8 +7,22 @@ $user = DB::getInstance()->get('users', array('username', '=', 'mat'));
 if(!$user->count()){
     echo 'No user';
 }else {
-    echo 'Oki';
+    echo $user->first()->username;
 }
+
+//$user = DB::getInstance()->query("SELECT * FROM users");
+//
+//if(!$user->count()){
+//    echo 'No user';
+//}else {
+//    foreach($user->results() as $user){
+//
+//        echo $user->username, '<br>';
+//
+//    }
+//}
+
+
 
 //echo Config::get('mysql/host'); // localhost 127.0.0.1
 
