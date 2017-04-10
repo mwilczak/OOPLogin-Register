@@ -1,13 +1,13 @@
 <?php
 require_once 'core/init.php';
 
-$user = DB::getInstance()->insert('users', array(
-    'username' => 'Mateusz',
-    'password' => 'haslo',
-    'salt'     => 'salt',
-    'name'     => 'Imie i nazwisko',
-    'joined'   => '2017-04-09 00:00:00',
-    'group'    => '1'
+$user = DB::getInstance()->update('users', 3, array(
+//    'username' => 'Mateusz',
+    'password' => 'nowehaslo',
+//    'salt'     => 'salt',
+    'name'     => 'Imie i beznawizka',
+//    'joined'   => '2017-04-09 00:00:00',
+//    'group'    => '1'
 
 
 
