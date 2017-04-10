@@ -2,8 +2,13 @@
 require_once 'core/init.php';
 
 
-DB::getInstance();
+$user = DB::getInstance()->query("SELECT username FROM users WHERE username = ?", array('mat'));
 
+if($user->error()){
+    echo 'No user';
+}else {
+    echo 'Ok';
+}
 
 //echo Config::get('mysql/host'); // localhost 127.0.0.1
 
