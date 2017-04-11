@@ -1,1 +1,1 @@
-<?php
+Nie znaleziono strony

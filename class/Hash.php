@@ -9,7 +9,8 @@ class Hash
     }
     public static function salt($length)
     {
-        return uniqid(mt_rand($length), true); //mcrypt_create_iv($length);
+        return uniqid(mt_rand($length));
+//         return mcrypt_create_iv($length);
     }
     public static function unique()
     {

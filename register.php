@@ -43,11 +43,11 @@ if (Input::exists()) {
                         'salt' => $salt,
                         'name' => Input::get('name'),
                         'joined' => date('Y-m-d H:i:s'),
-                        'group' => 1,
+                        'group' => 1
                 ));
 
                 Session::flash('home', 'Rejestracja zakończona powodzeniem | Można się logować');
-                header('Location: index.php');
+                Redirect::to('index.php');
 
             }catch (Exception $exception){
                 die($exception->getMessage());
@@ -92,6 +92,6 @@ if (Input::exists()) {
 
     <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
-    <input type="submit" name="subtmit" value="Zarejestruj">
+    <input type="submit" name="submit" value="Zarejestruj">
 </form>
 
