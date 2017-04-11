@@ -5,8 +5,8 @@ $GLOBALS['config'] = array(
 
     'mysql' => array(
         'host' => '127.0.0.1',
-        'username' => 'root',
-        'password' => 'coderslab',
+        'username' => 'admin',
+        'password' => 'admin',
         'db' => 'oopLogin'
     ),
     'remember' => array(
@@ -15,7 +15,8 @@ $GLOBALS['config'] = array(
 
     ),
     'session' => array(
-        'session_name' => 'user'
+        'session_name' => 'user',
+        'token_name' => 'token'
     )
 
 );
@@ -28,8 +29,8 @@ $GLOBALS['config'] = array(
 //zamiast dodawać każdy plik możemy użyć funkcji która załaduje automatycznie wszystkie klasy
 //gdy trzeba
 
-spl_autoload_register(function($class){
-    require_once 'class/'. $class .'.php';  //$class = nazwa klasy
+spl_autoload_register(function ($class) {
+    require_once 'class/' . $class . '.php';  //$class = nazwa klasy
 });
 
 require_once 'function/sanitize.php';

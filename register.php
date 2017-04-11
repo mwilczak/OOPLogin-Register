@@ -1,45 +1,46 @@
 <?php
 require_once 'core/init.php';
 
+//var_dump(Token::check(Input::get('token')));
 
-if(Input::exists())
-{
-    $validate = new Validation();
-    $validation = $validate->check($_POST, array(
-        'username' => array(
-            'required' => true,
-            'min' => 2,
-            'max' => 20,
-            'unique' => 'users' //sprawdza czy już jest uzytkownik
-        ),
-        'password' => array(
-            'required' => true,
-            'min' => 6
+if (Input::exists()) {
+    if(Token::check(Input::get('token'))) {
+        $validate = new Validation();
+        $validation = $validate->check($_POST, array(
+            'username' => array(
+                'required' => true,
+                'min' => 2,
+                'max' => 20,
+                'unique' => 'users' //sprawdza czy już jest uzytkownik
+            ),
+            'password' => array(
+                'required' => true,
+                'min' => 6
 
-        ),
-        'password_again' => array(
-            'required' => true,
-            'matches' => 'password'
-        ),
-        'name' => array(
-            'required' => true,
-            'min' => 2,
-            'max' => 50
-        )
-    ));
+            ),
+            'password_again' => array(
+                'required' => true,
+                'matches' => 'password'
+            ),
+            'name' => array(
+                'required' => true,
+                'min' => 2,
+                'max' => 50
+            )
+        ));
 //    echo Input::get('username');    // echo $_POST['username']
 
-    if($validation->passed()){
-        //register
-        echo 'Sukces';
-    }else {
-        //error
+        if ($validation->passed()) {
+            //register
+            echo 'Sukces';
+        } else {
+            //error
 //        print_r($validation->errors());
-        foreach ($validation->errors() as $error){
-            echo $error, '<br>';
+            foreach ($validation->errors() as $error) {
+                echo $error, '<br>';
+            }
         }
     }
-
 }
 
 
@@ -49,7 +50,8 @@ if(Input::exists())
 <form action="" method="POST">
     <div class="field">
         <label for="username">Nazwa użytkownika</label>
-        <input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off">
+        <input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>"
+               autocomplete="off">
     </div>
 
     <div class="field">
@@ -66,6 +68,8 @@ if(Input::exists())
         <label for="name">Imię i nazwisko</label>
         <input type="name" name="name" id="name" value="<?php echo escape(Input::get('name')); ?>"">
     </div>
+
+    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
     <input type="submit" name="subtmit" value="Zarejestruj">
 </form>
