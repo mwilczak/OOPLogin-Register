@@ -1,12 +1,16 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: mateusz
- * Date: 09.04.17
- * Time: 19:13
- */
 class User
 {
+    private $_db;
 
+    public function __construct($user = null)
+    {
+        $this->_db = DB::getInstance();
+    }
+    public function create($fields =array()){
+        if($this->_db->insert('users', $fields)){
+            throw new Exception('Nie moża utworzyć użytkownika');
+        }
+    }
 }

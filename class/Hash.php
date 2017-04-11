@@ -1,12 +1,18 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: mateusz
- * Date: 09.04.17
- * Time: 19:10
- */
+
 class Hash
 {
-
+    public static function make($string, $salt = '')
+    {
+        return hash('sha256', $string . $salt);
+    }
+    public static function salt($length)
+    {
+        return uniqid(mt_rand($length), true); //mcrypt_create_iv($length);
+    }
+    public static function unique()
+    {
+        return self::make(uniqid());
+    }
 }

@@ -32,7 +32,28 @@ if (Input::exists()) {
 
         if ($validation->passed()) {
             //register
-            echo 'Sukces';
+            $user = new User();
+
+            $salt = Hash::salt(32);
+            try {
+
+                $user->create(array(
+                        'username' => Input::get('username'),
+                        'password' => Hash::make(Input::get('password'), $salt),
+                        'salt' => $salt,
+                        'name' => Input::get('name'),
+                        'joined' => date('Y-m-d H:i:s'),
+                        'group' => 1,
+                ));
+
+                Session::flash('home', 'Rejestracja zakończona powodzeniem | Można się logować');
+                header('Location: index.php');
+
+            }catch (Exception $exception){
+                die($exception->getMessage());
+            }
+//            Session::flash('success', 'Rejestracja zakończona powodzeniem');
+//            header('Location: index.php');
         } else {
             //error
 //        print_r($validation->errors());
