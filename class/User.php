@@ -17,13 +17,13 @@ class User
             if (Session::exists($this->_sessionName)) {
                 $user = Session::get($this->_sessionName);
 
-                if($this->find($user)) {
+                if ($this->find($user)) {
                     $this->_isLoggedIn = true;
-                }else {
+                } else {
                     // proccess logout
                 }
             }
-        }else {
+        } else {
             $this->find($user);
         }
     }
@@ -70,5 +70,10 @@ class User
     public function isLoggedIn()
     {
         return $this->_isLoggedIn;
+    }
+
+    public function logout()
+    {
+        Session::delete($this->_sessionName);
     }
 }

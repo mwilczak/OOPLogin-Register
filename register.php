@@ -4,7 +4,7 @@ require_once 'core/init.php';
 //var_dump(Token::check(Input::get('token')));
 
 if (Input::exists()) {
-    if(Token::check(Input::get('token'))) {
+    if (Token::check(Input::get('token'))) {
         $validate = new Validation();
         $validation = $validate->check($_POST, array(
             'username' => array(
@@ -38,18 +38,18 @@ if (Input::exists()) {
             try {
 
                 $user->create(array(
-                        'username' => Input::get('username'),
-                        'password' => Hash::make(Input::get('password'), $salt),
-                        'salt' => $salt,
-                        'name' => Input::get('name'),
-                        'joined' => date('Y-m-d H:i:s'),
-                        'group' => 1
+                    'username' => Input::get('username'),
+                    'password' => Hash::make(Input::get('password'), $salt),
+                    'salt' => $salt,
+                    'name' => Input::get('name'),
+                    'joined' => date('Y-m-d H:i:s'),
+                    'group' => 1
                 ));
 
                 Session::flash('home', 'Rejestracja zakończona powodzeniem | Można się logować');
                 Redirect::to('index.php');
 
-            }catch (Exception $exception){
+            } catch (Exception $exception) {
                 die($exception->getMessage());
             }
 //            Session::flash('success', 'Rejestracja zakończona powodzeniem');
