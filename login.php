@@ -15,7 +15,7 @@ if (Input::exists()) {
             $login = $user->login(Input::get('username'), Input::get('password'));
 
             if($login){
-                echo 'Sukces';
+                Redirect::to('index.php');
             }else {
                 echo 'Sorka nie zalogowano';
             }

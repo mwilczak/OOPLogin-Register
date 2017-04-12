@@ -5,7 +5,24 @@ if(Session::exists('home')){
     echo '<p>'.  Session::flash('home') . '</p>';
 }
 
-echo Session::get(Config::get('session/session_name'));
+$user = new User(); //obecny user
+if($user->isLoggedIn()) {
+    ?>
+    <h3>Witaj <a href="#"><?php echo escape($user->data()->username); ?></a>!</h3>
+
+    <ul>
+        <li><a href="logout.php">Wyloguj</a></li>
+    </ul>
+<?php
+} else {
+    echo '<h2>Musisz się <a href="login.php">zalogować</a> albo <a href="register.php">zarejestrować</a></h2>';
+}
+
+
+//echo $user->data()->username;
+//$anotherUser = new User(14); // kolejny
+
+//echo Session::get(Config::get('session/session_name'));
 
 
 
