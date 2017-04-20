@@ -111,4 +111,14 @@ class User
         Session::delete($this->_sessionName);
         Cookie::delete($this->_cookieName);
     }
+    public function update($fields = array(), $id = null)
+    {
+        if(!$id && $this->isLoggedIn()){
+            $id = $this->data()->id;
+        }
+
+        if(!$this->_db->update('users', $id, $fields)) {
+            throw new Exception('Nie zmieniło danych, pojawił się problem');
+        }
+    }
 }
