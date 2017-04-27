@@ -1,7 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mateusz
- * Date: 09.04.17
- * Time: 18:39
- */
+require_once 'core/init.php';
+
+if(!$username = Input::get('user')){
+    Redirect::to('index.php');
+}else {
+    $user = new User($username);
+    if(!$user->exists()){
+        Redirect::to(404);
+    }else {
+        $data = $user->data();
+    }
+    ?>
+
+    <h3><?php echo escape($data->username); ?></h3>
+    <p>Imię i nazwisko: <?php echo escape($data->name) ?></p>
+
+<?php
+}
