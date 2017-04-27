@@ -16,8 +16,11 @@ if ($user->isLoggedIn()) {
         <li><a href="changePassword.php">Zmień hasło</a></li>
     </ul>
 
-    
     <?php
+    if($user->hasPermission($key)) {
+        echo '<p>Jesteś administratorem!</p>';
+    }
+
 } else {
     echo '<h2>Musisz się <a href="login.php">zalogować</a> albo <a href="register.php">zarejestrować</a></h2>';
 }

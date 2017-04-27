@@ -111,14 +111,27 @@ class User
         Session::delete($this->_sessionName);
         Cookie::delete($this->_cookieName);
     }
+
     public function update($fields = array(), $id = null)
     {
-        if(!$id && $this->isLoggedIn()){
+        if (!$id && $this->isLoggedIn()) {
             $id = $this->data()->id;
         }
 
-        if(!$this->_db->update('users', $id, $fields)) {
+        if (!$this->_db->update('users', $id, $fields)) {
             throw new Exception('Nie zmieniło danych, pojawił się problem');
         }
+    }
+
+    public function hasPermission($key)
+    {
+        $group = $this->_db->get('groups', array('id', '=', $this->data()->group));
+        if ($group->count()) {
+             $permissions = json_decode($group->first()->permissions, true);
+             if($permissions[$key] == true){
+                 return true;
+             }
+        }
+        return fasle;
     }
 }
